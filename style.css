@@ -1,0 +1,660 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --purple: #6846e8;
+    --purple-dark: #5032c7;
+    --purple-light: #f1edff;
+    --text: #28243d;
+    --muted: #89869b;
+    --border: #ebe8f4;
+    --white: #ffffff;
+    --background: #f7f6fb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* LOGIN */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 18px;
+    background: linear-gradient(135deg, #e8e0ff, #f8f7fc 65%);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 570px;
+    background: white;
+    border-radius: 30px;
+    padding: 55px;
+    box-shadow: 0 20px 60px rgba(60, 40, 120, 0.08);
+}
+
+.logo-icon {
+    width: 76px;
+    height: 76px;
+    border-radius: 23px;
+    background: var(--purple);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 43px;
+    font-weight: 800;
+    margin-bottom: 35px;
+}
+
+.logo-icon span,
+.brand h2 span,
+.login-card h1 span {
+    color: #a5f3d3;
+}
+
+.login-card h1 {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.login-card h1 span {
+    color: var(--purple);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 42px;
+}
+
+.login-card label,
+.form-card label {
+    display: block;
+    font-weight: 700;
+    margin: 20px 0 10px;
+}
+
+.login-card input,
+.login-card select,
+.form-card input,
+.form-card select,
+.add-student input {
+    width: 100%;
+    padding: 17px 19px;
+    border: 1.5px solid var(--border);
+    background: #fcfbff;
+    border-radius: 15px;
+    outline: none;
+    color: var(--text);
+    font-size: 16px;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--purple);
+}
+
+.btn-primary {
+    background: var(--purple);
+    color: white;
+    border-radius: 14px;
+    padding: 15px 22px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--purple-dark);
+    transform: translateY(-1px);
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 28px;
+    padding: 18px;
+    font-size: 18px;
+}
+
+.login-info {
+    background: #f5f2ff;
+    border-radius: 17px;
+    padding: 20px;
+    margin-top: 30px;
+    color: #716b8c;
+    line-height: 2;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #d14d61;
+}
+
+
+/* APLIKASI */
+
+.app-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 255px;
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 35px;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: var(--purple);
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.brand h2 {
+    font-size: 21px;
+}
+
+.brand h2 span {
+    color: var(--purple);
+}
+
+.brand small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.menu-label {
+    color: #aaa6ba;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 0 12px 14px;
+}
+
+.sidebar nav {
+    display: grid;
+    gap: 7px;
+}
+
+.nav-btn {
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 11px;
+    background: transparent;
+    color: #77738a;
+    font-weight: 600;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: auto;
+    padding: 20px 5px;
+    border-top: 1px solid var(--border);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--purple-light);
+    color: var(--purple);
+    font-weight: 800;
+}
+
+.user-details {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.user-details strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.user-details small {
+    color: var(--muted);
+}
+
+.logout-btn {
+    background: #fff1f2;
+    color: #d34c63;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 700;
+}
+
+
+/* KONTEN */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.topbar h2 {
+    font-size: 25px;
+}
+
+.topbar p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.topbar-tag {
+    background: var(--purple-light);
+    color: var(--purple);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.welcome-card {
+    background: linear-gradient(120deg, #6846e8, #8d70f1);
+    border-radius: 22px;
+    padding: 32px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    opacity: 0.75;
+    margin-bottom: 10px;
+}
+
+.welcome-card h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.welcome-card p:last-child {
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.welcome-symbol {
+    font-size: 90px;
+    font-weight: 800;
+    opacity: 0.2;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 17px;
+    border: 1px solid var(--border);
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 12px 0 6px;
+}
+
+.stat-card h2 {
+    font-size: 29px;
+}
+
+.stat-icon {
+    width: 37px;
+    height: 37px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    font-weight: 800;
+}
+
+.purple {
+    color: var(--purple);
+    background: var(--purple-light);
+}
+
+.green {
+    color: #1c9c6b;
+    background: #e5f8ef;
+}
+
+.orange {
+    color: #d68b30;
+    background: #fff3df;
+}
+
+.blue {
+    color: #4284d8;
+    background: #eaf3ff;
+}
+
+.content-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.content-card h3 {
+    font-size: 19px;
+}
+
+.card-description,
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
+    margin-bottom: 22px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 460px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 15px 12px;
+    border-bottom: 1px solid #f0eef5;
+    font-size: 13px;
+}
+
+th {
+    color: var(--muted);
+    font-weight: 700;
+    background: #fbfaff;
+}
+
+td {
+    color: #514d63;
+}
+
+.delete-btn {
+    background: #fff0f1;
+    color: #d34c63;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.add-student {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.add-student input {
+    flex: 1;
+    min-width: 0;
+}
+
+.form-card {
+    max-width: 650px;
+}
+
+.form-card input,
+.form-card select {
+    margin-bottom: 8px;
+}
+
+.full-button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: #eeeafa;
+    color: var(--purple);
+    border-radius: 14px;
+    padding: 15px;
+    font-weight: 700;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.qr-display {
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.qr-display img {
+    max-width: 100%;
+}
+
+#qr-reader {
+    width: 100%;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+footer {
+    color: #aaa6ba;
+    text-align: center;
+    padding: 35px 10px 10px;
+    font-size: 12px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 215px;
+    }
+
+    .main-content {
+        padding: 23px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .login-card {
+        padding: 30px 23px;
+        border-radius: 25px;
+    }
+
+    .login-card h1 {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+    }
+
+    .app-page {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        padding-bottom: 15px;
+    }
+
+    .menu-label {
+        padding-bottom: 8px;
+    }
+
+    .sidebar nav {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .nav-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 11px 13px;
+    }
+
+    .sidebar-user {
+        margin-top: 10px;
+        padding: 12px 3px;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+
+    .main-content {
+        padding: 19px 14px;
+    }
+
+    .topbar h2 {
+        font-size: 21px;
+    }
+
+    .welcome-card {
+        padding: 23px;
+    }
+
+    .welcome-card h1 {
+        font-size: 22px;
+    }
+
+    .welcome-symbol {
+        font-size: 55px;
+    }
+
+    .stats-grid {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .stat-card h2 {
+        font-size: 25px;
+    }
+
+    .content-card {
+        padding: 18px;
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .add-student {
+        flex-direction: column;
+    }
+
+    .add-student button {
+        width: 100%;
+    }
+}

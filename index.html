@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HadirYuk | Absensi Digital</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Library QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- Library pemindai QR -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <script src="./script.js" defer></script>
+</head>
+<body>
+
+    <!-- LOGIN -->
+    <section id="loginPage" class="login-page">
+        <div class="login-card">
+            <div class="logo-icon">H<span>.</span></div>
+
+            <h1>HadirYuk<span>.</span></h1>
+            <p class="subtitle">Sistem Absensi Digital Sekolah</p>
+
+            <form id="loginForm">
+                <label for="loginRole">Login sebagai</label>
+                <select id="loginRole" required>
+                    <option value="siswa">Siswa</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <label for="username">Nama pengguna</label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Masukkan nama pengguna"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" class="btn-primary login-button">
+                    Masuk Sekarang
+                </button>
+            </form>
+
+            <div class="login-info">
+                <p><strong>Admin:</strong> admin / admin123</p>
+                <p><strong>Siswa:</strong> Nama lengkap / siswa123</p>
+            </div>
+
+            <p id="loginMessage" class="message"></p>
+        </div>
+    </section>
+
+
+    <!-- APLIKASI -->
+    <section id="appPage" class="app-page hidden">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">H</div>
+                <div>
+                    <h2>HadirYuk<span>.</span></h2>
+                    <small>Digital Attendance</small>
+                </div>
+            </div>
+
+            <p class="menu-label">MENU UTAMA</p>
+
+            <nav>
+                <button class="nav-btn active" data-page="dashboard">
+                    ▦ Dashboard
+                </button>
+
+                <button class="nav-btn admin-only" data-page="students">
+                    ♙ Data Siswa
+                </button>
+
+                <button class="nav-btn" data-page="attendance">
+                    ✓ Absensi
+                </button>
+
+                <button class="nav-btn" data-page="qr">
+                    ▦ QR Code
+                </button>
+
+                <button class="nav-btn" data-page="history">
+                    ◷ Riwayat
+                </button>
+
+                <button class="nav-btn admin-only" data-page="reports">
+                    ▤ Laporan
+                </button>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="avatar" id="sidebarAvatar">A</div>
+                <div class="user-details">
+                    <strong id="sidebarName">Admin</strong>
+                    <small id="sidebarRole">Administrator</small>
+                </div>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">
+                ↪ Keluar
+            </button>
+        </aside>
+
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p id="currentDate"></p>
+                </div>
+                <div class="topbar-tag">XI RPL 1</div>
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+                <div class="welcome-card">
+                    <div>
+                        <p class="eyebrow">WELCOME BACK!</p>
+                        <h1>Halo, <span id="welcomeName">Admin</span> 👋</h1>
+                        <p>Kelola kehadiran kelas XI RPL 1 dengan mudah.</p>
+                    </div>
+                    <div class="welcome-symbol">H.</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon purple">♙</span>
+                        <p>Total Siswa</p>
+                        <h2 id="totalStudents">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon green">✓</span>
+                        <p>Hadir Hari Ini</p>
+                        <h2 id="totalPresent">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon orange">◷</span>
+                        <p>Belum Absen</p>
+                        <h2 id="totalAbsent">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon blue">%</span>
+                        <p>Persentase Hadir</p>
+                        <h2 id="presentPercent">0%</h2>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="section-heading">
+                        <div>
+                            <h3>Absensi Hari Ini</h3>
+                            <p>Daftar siswa yang sudah mengisi absensi.</p>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama Siswa</th>
+                                    <th>Status</th>
+                                    <th>Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboardAttendance"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- DATA SISWA -->
+            <section id="students" class="page">
+                <div class="content-card">
+                    <div class="section-heading">
+                        <div>
+                            <h3>Data Siswa</h3>
+                            <p>Daftar siswa kelas XI RPL 1.</p>
+                        </div>
+                    </div>
+
+                    <div class="add-student">
+                        <input
+                            type="text"
+                            id="newStudent"
+                            placeholder="Masukkan nama siswa baru"
+                        >
+                        <button id="addStudentBtn" class="btn-primary">
+                            + Tambah
+                        </button>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ABSENSI -->
+            <section id="attendance" class="page">
+                <div class="content-card form-card">
+                    <h3>Form Absensi</h3>
+                    <p class="card-description">
+                        Isi kehadiran untuk hari ini.
+                    </p>
+
+                    <label for="attendanceStudent">Nama Siswa</label>
+                    <select id="attendanceStudent"></select>
+
+                    <label for="attendanceStatus">Status Kehadiran</label>
+                    <select id="attendanceStatus">
+                        <option value="Hadir">Hadir</option>
+                        <option value="Izin">Izin</option>
+                        <option value="Sakit">Sakit</option>
+                    </select>
+
+                    <button id="saveAttendance" class="btn-primary full-button">
+                        Simpan Absensi
+                    </button>
+
+                    <p id="attendanceMessage" class="message"></p>
+                </div>
+            </section>
+
+
+            <!-- QR CODE -->
+            <section id="qr" class="page">
+                <div class="two-column">
+
+                    <div class="content-card form-card">
+                        <h3>Buat QR Code</h3>
+                        <p class="card-description">
+                            Admin dapat membuat QR Code absensi harian.
+                        </p>
+
+                        <button id="generateQR" class="btn-primary full-button">
+                            Buat QR Code
+                        </button>
+
+                        <div id="qrDisplay" class="qr-display"></div>
+                        <p id="qrMessage" class="message"></p>
+                    </div>
+
+                    <div class="content-card form-card">
+                        <h3>Scan QR Code</h3>
+                        <p class="card-description">
+                            Siswa dapat memindai QR Code untuk mengisi absensi.
+                        </p>
+
+                        <div id="qr-reader"></div>
+
+                        <button id="startScan" class="btn-primary full-button">
+                            Mulai Scan QR
+                        </button>
+
+                        <button id="stopScan" class="btn-secondary full-button hidden">
+                            Hentikan Kamera
+                        </button>
+
+                        <p id="scanMessage" class="message"></p>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- RIWAYAT -->
+            <section id="history" class="page">
+                <div class="content-card">
+                    <h3>Riwayat Absensi</h3>
+                    <p class="card-description">
+                        Catatan kehadiran siswa.
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th>Waktu</th>
+                                    <th>Metode</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- LAPORAN -->
+            <section id="reports" class="page">
+                <div class="content-card">
+                    <h3>Laporan Kehadiran</h3>
+                    <p class="card-description">
+                        Ringkasan absensi hari ini.
+                    </p>
+
+                    <div id="reportSummary" class="stats-grid"></div>
+
+                    <button id="printReport" class="btn-primary">
+                        Cetak Laporan
+                    </button>
+                </div>
+            </section>
+
+            <footer>
+                © 2026 HadirYuk · XI RPL 1
+            </footer>
+        </main>
+    </section>
+
+</body>
+</html>
